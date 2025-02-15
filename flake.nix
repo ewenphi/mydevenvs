@@ -8,6 +8,7 @@
   outputs = _: {
     homeManagerModules = {
       devenvs = {
+        default = import ./default.nix;
         c = import ./c.nix;
         go = import ./go.nix;
         nix = import ./nix.nix;
