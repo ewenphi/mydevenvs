@@ -9,6 +9,11 @@
     homeManagerModules = {
       devenvs = {
         c = import ./c.nix;
+        go = import ./go.nix;
+        nix = import ./nix.nix;
+        python = import ./python.nix;
+        rust = import ./rust.nix;
+        ts = import ./typescript.nix;
       };
     };
   };
