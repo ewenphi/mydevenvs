@@ -1,9 +1,5 @@
 {
-  description = "A very basic flake";
-
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-  };
+  description = "my devenvs modules for my dev setup";
 
   outputs = _: {
     homeManagerModules = {
