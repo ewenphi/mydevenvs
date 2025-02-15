@@ -34,7 +34,7 @@
         eslint.enable = true;
         biome.enable = true;
       }
-      // lib.mkIf config.ts.prettier.enable {
+      // lib.attrsets.optionalAttrs config.ts.prettier.enable {
         prettier.enable = true;
       };
   };
