@@ -14,13 +14,11 @@
 
     git-hooks.hooks = {
       rustfmt.enable = true;
-      nixpkgs-fmt.enable = true;
       taplo.enable = true;
       markdownlint.enable = true;
       yamlfmt.enable = true;
       clippy.enable = true;
       cargo-check.enable = true;
-      commitizen.enable = true;
     };
 
     packages = [
