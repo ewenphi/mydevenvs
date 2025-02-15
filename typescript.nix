@@ -10,10 +10,6 @@
   };
 
   config = lib.mkIf config.ts.enable {
-    enterShell = ''
-      echo hello from
-    '';
-
     enterTest = ''
       jest
     '';

@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -27,26 +26,6 @@
         pass_filenames = false;
       };
 
-    };
-
-    enterShell = ''
-      echo hello from 
-    '';
-
-    outputs = {
-      filesort = pkgs.buildGoModule {
-        pname = "filesort";
-        version = "0.1.0";
-
-        src = ./.;
-
-        vendorHash = null;
-
-        meta = {
-          description = "";
-          homepage = "";
-        };
-      };
     };
   };
 }

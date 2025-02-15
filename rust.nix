@@ -33,9 +33,5 @@
     env = {
       RUST_BACKTRACE = "1";
     };
-
-    enterShell = ''
-      echo "shell pour "
-    '';
   };
 }

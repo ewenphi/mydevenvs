@@ -22,9 +22,5 @@
     packages = [
       pkgs.nil
     ];
-
-    enterShell = ''
-      echo hello from 
-    '';
   };
 }
