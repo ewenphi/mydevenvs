@@ -6,8 +6,11 @@
 }:
 {
   options = {
-    ts.enable = lib.mkEnableOption "enable ts devenv";
-    ts.prettier.enable = lib.mkEnableOption "enable prettier";
+    ts = {
+      enable = lib.mkEnableOption "enable ts devenv";
+      prettier.enable = lib.mkEnableOption "enable prettier hook";
+      biome.enable = lib.mkEnableOption "enable biome hook";
+    };
   };
 
   config = lib.mkIf config.ts.enable {
@@ -32,6 +35,8 @@
     git-hooks.hooks =
       {
         eslint.enable = true;
+      }
+      // lib.attrsets.optionalAttrs config.ts.biome.enable {
         biome.enable = true;
       }
       // lib.attrsets.optionalAttrs config.ts.prettier.enable {
