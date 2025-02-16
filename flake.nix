@@ -1,6 +1,13 @@
 {
   description = "my devenvs modules for my dev setup";
 
+  inputs = {
+    advisory-db = {
+      url = "github:rustsec/advisory-db";
+      flake = false;
+    };
+  };
+
   outputs =
     { self, ... }:
     {
