@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "advisory-db": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739520703,
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "rev": "ddccfe8aced779f7b54d27bbe7e122ecb1dda33a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rustsec",
+        "repo": "advisory-db",
+        "type": "github"
+      }
+    },
     "devenv": {
       "locked": {
         "dir": "src/modules",
@@ -89,6 +104,7 @@
     },
     "root": {
       "inputs": {
+        "advisory-db": "advisory-db",
         "devenv": "devenv",
         "git-hooks": "git-hooks",
         "nixpkgs": "nixpkgs",
