@@ -37,7 +37,7 @@
       cargo-audit = {
         enable = true;
         name = "cargo-audit";
-        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.advisory-db} -D warnings -D unmaintained -D unsound -D yanked";
+        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.devenvs.inputs.advisory-db} -D warnings -D unmaintained -D unsound -D yanked";
         files = "\\.rs$";
         pass_filenames = false;
       };
