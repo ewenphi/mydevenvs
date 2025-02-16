@@ -4,7 +4,7 @@
   outputs =
     { self, ... }:
     {
-      homeManagerModules = {
+      devenvModules = {
         devenvs = {
           default = import ./default.nix;
           c = import ./c.nix;
@@ -14,7 +14,7 @@
           rust = import ./rust.nix;
           ts = import ./typescript.nix;
         };
-        inherit (self.homeManagerModules.devenvs) default;
+        inherit (self.devenvModules.devenvs) default;
       };
     };
 }
