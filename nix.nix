@@ -20,7 +20,7 @@
       commitizen.enable = true;
     };
 
-    enterTest = lib.mkIf config.nix.nix-build.enable (lib.mkDefault ''nix build'');
+    enterTest = lib.mkIf config.nix.nix-build.enable (lib.mkOverride 100 ''nix build'');
 
     packages = [
       pkgs.nil
