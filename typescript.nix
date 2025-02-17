@@ -10,11 +10,12 @@
       enable = lib.mkEnableOption "enable ts devenv";
       prettier.enable = lib.mkEnableOption "enable prettier hook";
       biome.enable = lib.mkEnableOption "enable biome hook";
+      tests.enable = lib.mkEnableOption "enable tests with jest";
     };
   };
 
   config = lib.mkIf config.ts.enable {
-    enterTest = ''
+    enterTest = lib.mkIf config.ts.tests.enable ''
       jest
     '';
 
