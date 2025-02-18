@@ -8,6 +8,7 @@
 {
   options = {
     rust.enable = lib.mkEnableOption "enable rust devenv";
+    rust.tests.enable = lib.mkEnableOption "enable nextest + test -doc";
   };
 
   config = lib.mkIf config.rust.enable {
@@ -63,9 +64,11 @@
       coverage.exec = "${pkgs.cargo-tarpaulin}/bin/cargo-tarpaulin --skip-clean --out Html";
     };
 
-    enterTest = ''
-      ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
-      cargo test --doc
-    '';
+    enterTest = lib.mkIf config.rust.tests.enable (
+      lib.mkOverride 90 ''
+        ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
+        cargo test --doc
+      ''
+    );
   };
 }
