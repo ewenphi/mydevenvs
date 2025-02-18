@@ -6,8 +6,11 @@
 }:
 {
   options = {
-    nix.enable = lib.mkEnableOption "enable nix devenv";
-    nix.flake.enable = lib.mkEnableOption "enable nix build in test";
+    nix = {
+      enable = lib.mkEnableOption "enable nix devenv";
+      flake.enable = lib.mkEnableOption "enable flake";
+      tests.enable = lib.mkEnableOption "nix build in test";
+    };
   };
 
   config = lib.mkIf config.nix.enable {
@@ -24,7 +27,7 @@
         flake-checker.enable = true;
       };
 
-    common.tests = lib.mkIf config.nix.flake.enable ''nix build'';
+    common.tests = lib.mkIf config.nix.tests.enable ''nix build'';
 
     packages = [
       pkgs.nil
