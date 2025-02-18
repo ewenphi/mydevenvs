@@ -12,14 +12,17 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ];
+      imports = [ inputs.flake-parts.flakeModules.flakeModules ];
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
       ];
-      perSystem = _: {
-
-        default = {
+      perSystem =
+        _:
+        {
+        };
+      flake = {
+        flakeModule = {
           default = import ./default.nix;
           c = import ./c.nix;
           go = import ./go.nix;
@@ -29,8 +32,5 @@
           ts = import ./typescript.nix;
         };
       };
-      flake =
-        {
-        };
     };
 }
