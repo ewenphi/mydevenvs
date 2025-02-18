@@ -11,6 +11,9 @@
       ruff.enable = true;
       pylint.enable = true;
       black.enable = true;
+      isort.enable = true;
+      autoflake.enable = true;
+      pyupgrade.enable = true;
     };
   };
 }
