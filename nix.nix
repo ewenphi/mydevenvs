@@ -7,7 +7,7 @@
 {
   options = {
     nix.enable = lib.mkEnableOption "enable nix devenv";
-    nix.nix-build.enable = lib.mkEnableOption "enable nix build in test";
+    nix.flake.enable = lib.mkEnableOption "enable nix build in test";
   };
 
   config = lib.mkIf config.nix.enable {
@@ -20,7 +20,7 @@
       commitizen.enable = true;
     };
 
-    enterTest = lib.mkIf config.nix.nix-build.enable (lib.mkOverride 100 ''nix build'');
+    config.common.tests = lib.mkIf config.nix.flake.enable ''nix build'';
 
     packages = [
       pkgs.nil
