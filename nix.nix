@@ -20,7 +20,7 @@
       commitizen.enable = true;
     };
 
-    config.common.tests = lib.mkIf config.nix.flake.enable ''nix build'';
+    common.tests = lib.mkIf config.nix.flake.enable ''nix build'';
 
     packages = [
       pkgs.nil

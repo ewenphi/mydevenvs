@@ -64,7 +64,7 @@
       coverage.exec = "${pkgs.cargo-tarpaulin}/bin/cargo-tarpaulin --skip-clean --out Html";
     };
 
-    config.common.tests = lib.mkIf config.rust.tests.enable ''
+    common.tests = lib.mkIf config.rust.tests.enable ''
       ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
       cargo test --doc
     '';
