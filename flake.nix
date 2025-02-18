@@ -6,13 +6,20 @@
       url = "github:rustsec/advisory-db";
       flake = false;
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs =
-    { self, ... }:
-    {
-      devenvModules = {
-        devenvs = {
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ ];
+      systems = [
+        "x86_64-linux"
+        "x86_64-darwin"
+      ];
+      perSystem = _: {
+
+        default = {
           default = import ./default.nix;
           c = import ./c.nix;
           go = import ./go.nix;
@@ -21,7 +28,9 @@
           rust = import ./rust.nix;
           ts = import ./typescript.nix;
         };
-        inherit (self.devenvModules.devenvs) default;
       };
+      flake =
+        {
+        };
     };
 }
