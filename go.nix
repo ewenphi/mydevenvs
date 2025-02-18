@@ -6,6 +6,7 @@
 {
   options = {
     go.enable = lib.mkEnableOption "enable go devenv";
+    go.tests.enable = lib.mkEnableOption "enable go test";
   };
 
   config = lib.mkIf config.go.enable {
@@ -25,7 +26,10 @@
         files = "\\.go$";
         pass_filenames = false;
       };
-
     };
+
+    common.tests = lib.mkIf config.go.tests.enable ''
+      go test
+    '';
   };
 }
