@@ -6,7 +6,7 @@
 }:
 {
   options = {
-    ts = {
+    devenvs.ts = {
       enable = lib.mkEnableOption "enable ts devenv";
       prettier.enable = lib.mkEnableOption "enable prettier hook";
       biome.enable = lib.mkEnableOption "enable biome hook";
@@ -14,8 +14,8 @@
     };
   };
 
-  config = lib.mkIf config.ts.enable {
-    enterTest = lib.mkIf config.ts.tests.enable ''
+  config = lib.mkIf config.devenvs.ts.enable {
+    enterTest = lib.mkIf config.devenvs.ts.tests.enable ''
       jest
     '';
 
@@ -37,10 +37,10 @@
       {
         eslint.enable = true;
       }
-      // lib.attrsets.optionalAttrs config.ts.biome.enable {
+      // lib.attrsets.optionalAttrs config.devenvs.ts.biome.enable {
         biome.enable = true;
       }
-      // lib.attrsets.optionalAttrs config.ts.prettier.enable {
+      // lib.attrsets.optionalAttrs config.devenvs.ts.prettier.enable {
         prettier.enable = true;
       };
   };

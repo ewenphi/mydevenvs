@@ -1,10 +1,10 @@
 { config, lib, ... }:
 {
   options = {
-    python.enable = lib.mkEnableOption "enable python devenv";
+    devenvs.python.enable = lib.mkEnableOption "enable python devenv";
   };
 
-  config = lib.mkIf config.python.enable {
+  config = lib.mkIf config.devenvs.python.enable {
     languages.python.enable = true;
 
     git-hooks.hooks = {

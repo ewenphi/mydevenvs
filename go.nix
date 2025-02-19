@@ -5,11 +5,11 @@
 }:
 {
   options = {
-    go.enable = lib.mkEnableOption "enable go devenv";
-    go.tests.enable = lib.mkEnableOption "enable go test";
+    devenvs.go.enable = lib.mkEnableOption "enable go devenv";
+    devenvs.go.tests.enable = lib.mkEnableOption "enable go test";
   };
 
-  config = lib.mkIf config.go.enable {
+  config = lib.mkIf config.devenvs.go.enable {
     languages.go.enable = true;
 
     git-hooks.hooks = {
@@ -28,7 +28,7 @@
       };
     };
 
-    enterTest = lib.mkIf config.go.tests.enable ''
+    enterTest = lib.mkIf config.devenvs.go.tests.enable ''
       go test
     '';
   };

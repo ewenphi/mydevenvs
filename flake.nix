@@ -23,10 +23,10 @@
         "x86_64-darwin"
       ];
       perSystem = _: {
+        devenv.modules = [ ./default.nix ];
         devenv.shells.default = {
-          imports = [ ./nix.nix ];
-          nix.enable = true;
-          nix.flake.enable = true;
+          devenvs.nix.enable = true;
+          devenvs.nix.flake.enable = true;
         };
       };
       flake = {

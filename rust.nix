@@ -7,11 +7,11 @@
 }:
 {
   options = {
-    rust.enable = lib.mkEnableOption "enable rust devenv";
-    rust.tests.enable = lib.mkEnableOption "enable nextest + test -doc";
+    devenvs.rust.enable = lib.mkEnableOption "enable rust devenv";
+    devenvs.rust.tests.enable = lib.mkEnableOption "enable nextest + test -doc";
   };
 
-  config = lib.mkIf config.rust.enable {
+  config = lib.mkIf config.devenvs.rust.enable {
     languages.rust.enable = true;
 
     git-hooks.hooks = {
@@ -64,7 +64,7 @@
       coverage.exec = "${pkgs.cargo-tarpaulin}/bin/cargo-tarpaulin --skip-clean --out Html";
     };
 
-    enterTest = lib.mkIf config.rust.tests.enable ''
+    enterTest = lib.mkIf config.devenvs.rust.tests.enable ''
       ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
       cargo test --doc
     '';

@@ -6,10 +6,10 @@
 }:
 {
   options = {
-    c.enable = lib.mkEnableOption "enable c devenv";
+    devenvs.c.enable = lib.mkEnableOption "enable c devenv";
   };
 
-  config = lib.mkIf config.c.enable {
+  config = lib.mkIf config.devenvs.c.enable {
     packages = [ pkgs.clang ];
 
     git-hooks.hooks = {
