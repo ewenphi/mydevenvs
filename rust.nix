@@ -38,7 +38,7 @@
       cargo-audit = {
         enable = true;
         name = "cargo-audit";
-        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.devenvs.inputs.advisory-db} -D warnings -D unmaintained -D unsound -D yanked";
+        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.devenvs.inputs.advisory-db} -D warnings -D unmaintained -D unsound -D yanked"; # TODO: maybe essayer de mettre db dans une option pour pas rely on inputs
         files = "\\.rs$";
         pass_filenames = false;
       };
@@ -64,7 +64,7 @@
       coverage.exec = "${pkgs.cargo-tarpaulin}/bin/cargo-tarpaulin --skip-clean --out Html";
     };
 
-    common.tests = lib.mkIf config.rust.tests.enable ''
+    enterTest = lib.mkIf config.rust.tests.enable ''
       ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
       cargo test --doc
     '';

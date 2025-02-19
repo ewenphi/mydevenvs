@@ -27,7 +27,7 @@
         flake-checker.enable = true;
       };
 
-    common.tests = lib.mkIf config.nix.tests.enable ''nix build'';
+    enterTest = lib.mkIf config.nix.tests.enable ''nix build'';
 
     packages = [
       pkgs.nil

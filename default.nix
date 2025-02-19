@@ -6,6 +6,5 @@ _: {
     ./python.nix
     ./rust.nix
     ./typescript.nix
-    ./common.nix
   ];
 }

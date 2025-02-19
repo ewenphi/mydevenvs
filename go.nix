@@ -28,7 +28,7 @@
       };
     };
 
-    common.tests = lib.mkIf config.go.tests.enable ''
+    enterTest = lib.mkIf config.go.tests.enable ''
       go test
     '';
   };
