@@ -47,7 +47,7 @@
       // lib.attrsets.optionalAttrs config.devenvs.ts.script-lint.enable {
         npm-lint = {
           enable = true;
-          entry = "npm lint";
+          entry = "npm run lint";
           files = "\\.((js)|(ts))";
           pass_filenames = false;
         };
