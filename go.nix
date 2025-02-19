@@ -10,9 +10,9 @@
   };
 
   config = lib.mkIf config.devenvs.go.enable {
-    languages.go.enable = true;
+    languages.go.enable = lib.mkIf config.devenvs.global.languages.enable true;
 
-    git-hooks.hooks = {
+    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
       gofmt.enable = true;
       golangci-lint.enable = true;
       gotest.enable = true;
@@ -28,8 +28,10 @@
       };
     };
 
-    enterTest = lib.mkIf config.devenvs.go.tests.enable ''
-      go test
-    '';
+    enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
+      lib.mkIf config.devenvs.go.tests.enable ''
+        go test
+      ''
+    );
   };
 }

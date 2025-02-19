@@ -10,9 +10,9 @@
   };
 
   config = lib.mkIf config.devenvs.c.enable {
-    packages = [ pkgs.clang ];
+    packages = lib.mkIf config.devenvs.global.packages.enable [ pkgs.clang ];
 
-    git-hooks.hooks = {
+    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
       clang-format.enable = true;
     };
   };

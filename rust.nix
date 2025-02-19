@@ -12,9 +12,9 @@
   };
 
   config = lib.mkIf config.devenvs.rust.enable {
-    languages.rust.enable = true;
+    languages.rust.enable = lib.mkIf config.devenvs.global.languages.enable true;
 
-    git-hooks.hooks = {
+    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
       rustfmt.enable = true;
       taplo.enable = true;
       markdownlint.enable = true;
@@ -44,7 +44,7 @@
       };
     };
 
-    packages = [
+    packages = lib.mkIf config.devenvs.global.packages.enable [
       #voir la taille des grosses deps
       pkgs.cargo-bloat
       #gerer les deps depuis le cli
@@ -53,20 +53,22 @@
       pkgs.cargo-watch
     ];
 
-    env = {
+    env = lib.mkIf config.devenvs.global.env.enable {
       RUST_BACKTRACE = "1";
     };
 
-    scripts = {
+    scripts = lib.mkIf config.devenvs.global.scripts.enable {
       docs.exec = "cargo doc";
       update.exec = "cargo update -v --recursive";
 
       coverage.exec = "${pkgs.cargo-tarpaulin}/bin/cargo-tarpaulin --skip-clean --out Html";
     };
 
-    enterTest = lib.mkIf config.devenvs.rust.tests.enable ''
-      ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
-      cargo test --doc
-    '';
+    enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
+      lib.mkIf config.devenvs.rust.tests.enable ''
+        ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
+        cargo test --doc
+      ''
+    );
   };
 }

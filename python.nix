@@ -5,9 +5,9 @@
   };
 
   config = lib.mkIf config.devenvs.python.enable {
-    languages.python.enable = true;
+    languages.python.enable = lib.mkIf config.devenvs.global.languages.enable true;
 
-    git-hooks.hooks = {
+    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
       ruff.enable = true;
       pylint.enable = true;
       black.enable = true;

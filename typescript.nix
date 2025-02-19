@@ -16,11 +16,13 @@
   };
 
   config = lib.mkIf config.devenvs.ts.enable {
-    enterTest = lib.mkIf config.devenvs.ts.tests.enable ''
-      jest
-    '';
+    enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
+      lib.mkIf config.devenvs.ts.tests.enable ''
+        jest
+      ''
+    );
 
-    languages = {
+    languages = lib.mkIf config.devenvs.global.languages.enable {
       javascript = {
         enable = true;
         npm.enable = true;
@@ -30,12 +32,12 @@
       typescript.enable = true;
     };
 
-    scripts = {
+    scripts = lib.mkIf config.devenvs.global.scripts.enable {
       tests.exec = config.enterTest;
     };
 
     git-hooks.hooks =
-      {
+      lib.mkIf config.devenvs.global.hooks.enable {
         eslint.enable = true;
       }
       // lib.attrsets.optionalAttrs config.devenvs.ts.biome.enable {
