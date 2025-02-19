@@ -11,6 +11,7 @@
       prettier.enable = lib.mkEnableOption "enable prettier hook";
       biome.enable = lib.mkEnableOption "enable biome hook";
       tests.enable = lib.mkEnableOption "enable tests with jest";
+      script-lint.enable = lib.mkEnableOption "run npm lint as a hook";
     };
   };
 
@@ -42,6 +43,14 @@
       }
       // lib.attrsets.optionalAttrs config.devenvs.ts.prettier.enable {
         prettier.enable = true;
+      }
+      // lib.attrsets.optionalAttrs config.devenvs.ts.script-lint.enable {
+        npm-lint = {
+          enable = true;
+          entry = "npm lint";
+          files = "\\.((js)|(ts))";
+          pass_filenames = false;
+        };
       };
   };
 }
