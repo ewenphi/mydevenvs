@@ -30,9 +30,8 @@
         };
       };
       flake = {
-        flakeModule = {
-          default = import ./default.nix;
-        };
+        flakeModule = import ./default.nix;
+
       };
     };
 }
