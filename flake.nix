@@ -37,10 +37,13 @@
           };
         };
         flake = {
+          #flake-parts
           inherit flakeModules;
           flakeModule = flakeModules.default;
           devenv = inputs.devenv.flakeModule;
 
+          #classic module, to import in devenv.shells."yourshell"
+          devenvModule = import ./default.nix;
         };
       }
     );
