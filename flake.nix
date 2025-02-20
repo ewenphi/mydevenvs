@@ -39,7 +39,7 @@
         flake = {
           inherit flakeModules;
           flakeModule = flakeModules.default;
-          devenv = inputs.devenvs.flakeModule;
+          devenv = inputs.devenv.flakeModule;
 
         };
       }
