@@ -40,10 +40,8 @@
                 nix.enable = true;
                 nix.flake.enable = true;
                 tools.mkdocs.enable = true;
+                tools.mkdocs.package = config.packages.documentation;
               };
-              enterTest = ''
-                test ${config.packages.documentation}
-              '';
             };
             documentation = {
               mkdocs-root = ./.;
