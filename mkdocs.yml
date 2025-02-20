@@ -1,0 +1,28 @@
+site_name: MyDevenvs
+repo_url: https://github.com/yvaniak/devenvs
+repo_name: Devenvs
+site_description: extension of devenv
+site_author: Yvaniak
+nav:
+  - Setup: index.md
+  - Devenv docs: 'https://devenv.sh/getting-started'
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+      primary: cyan
+      accent: deep purple
+
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: cyan
+      accent: deep purple
+markdown_extensions:
+  - attr_list

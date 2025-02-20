@@ -9,6 +9,7 @@
       url = "github:rustsec/advisory-db";
       flake = false;
     };
+    mkdocs-flake.url = "github:applicative-systems/mkdocs-flake";
   };
 
   outputs =
@@ -25,17 +26,29 @@
           inputs.flake-parts.flakeModules.flakeModules
           flakeModules.default
           inputs.devenv.flakeModule
+          inputs.mkdocs-flake.flakeModule
         ];
         systems = [
           "x86_64-linux"
           "x86_64-darwin"
         ];
-        perSystem = _: {
-          devenv.shells.default = {
-            devenvs.nix.enable = true;
-            devenvs.nix.flake.enable = true;
+        perSystem =
+          { config, ... }:
+          {
+            devenv.shells.default = {
+              devenvs = {
+                nix.enable = true;
+                nix.flake.enable = true;
+              };
+              enterTest = ''
+                test ${config.packages.documentation}
+              '';
+            };
+            documentation = {
+              mkdocs-root = ./.;
+              strict = true;
+            };
           };
-        };
         flake = {
           #flake-parts
           inherit flakeModules;
@@ -44,6 +57,11 @@
 
           #classic module, to import in devenv.shells."yourshell"
           devenvModule = import ./default.nix;
+
+          templates.default = {
+            path = ./templates;
+            description = "myDevenvs template with flake-parts";
+          };
         };
       }
     );
