@@ -39,6 +39,7 @@
               devenvs = {
                 nix.enable = true;
                 nix.flake.enable = true;
+                tools.mkdocs.enable = true;
               };
               enterTest = ''
                 test ${config.packages.documentation}

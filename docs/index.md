@@ -73,7 +73,7 @@ Or add the inputs and import the modules in your flake with flake-parts.
 
 ###
 
-See [devenv flake-parts integration](htt:devenv.sh/guides/using-with-flake-parts/){:target="\_blank"} for more details on the flake-parts module.
+See [devenv flake-parts integration](https://devenv.sh/guides/using-with-flake-parts/){:target="\_blank"} for more details on the flake-parts module.
 
 ## Usage with flakes without flake-parts
 
