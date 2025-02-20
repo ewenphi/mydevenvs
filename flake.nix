@@ -26,6 +26,8 @@
         imports = [
           inputs.flake-parts.flakeModules.flakeModules
           flakeModules.default
+          inputs.devenv.flakeModule
+          inputs.mkdocs-flake.flakeModule
         ];
         systems = [
           "x86_64-linux"

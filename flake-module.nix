@@ -1,6 +1,4 @@
-localFlake:
-{ ... }:
-{
+_localFlake: _: {
   perSystem =
     {
       config,
@@ -15,15 +13,7 @@ localFlake:
 
       devenv.shells.default = {
         imports = [ ./default.nix ];
-        devenvs.tools.mkdocs.package = lib.mkIf (config.documentation.mkdocs-root != null) (
-          lib.mkDefault config.packages.documentation
-        );
       };
 
     };
-  imports = [
-    localFlake.inputs.devenv.flakeModule
-    localFlake.inputs.mkdocs-flake.flakeModule
-  ];
-
 }
