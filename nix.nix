@@ -61,6 +61,7 @@
         nixfmt-rfc-style.enable = true;
         statix.enable = true;
         deadnix.enable = true;
+        deadnix.settings.edit = true;
         commitizen.enable = true;
       }
       // lib.attrsets.optionalAttrs config.devenvs.nix.flake.enable {

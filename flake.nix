@@ -14,16 +14,17 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
-      { withSystem, flake-parts-lib, ... }:
+      { flake-parts-lib, ... }:
       let
         inherit (flake-parts-lib) importApply;
-        flakeModules.default = importApply ./flake-module.nix { inherit withSystem; };
+        flakeModules.default = importApply ./flake-module.nix {
+        };
       in
       {
         imports = [
           inputs.flake-parts.flakeModules.flakeModules
-          inputs.devenv.flakeModule
           flakeModules.default
+          inputs.devenv.flakeModule
         ];
         systems = [
           "x86_64-linux"
@@ -38,6 +39,7 @@
         flake = {
           inherit flakeModules;
           flakeModule = flakeModules.default;
+          devenv = inputs.devenvs.flakeModule;
 
         };
       }
