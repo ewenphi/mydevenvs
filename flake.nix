@@ -19,35 +19,27 @@
       let
         inherit (flake-parts-lib) importApply;
         flakeModules.default = importApply ./flake-module.nix {
+          inherit inputs;
         };
       in
       {
         imports = [
           inputs.flake-parts.flakeModules.flakeModules
           flakeModules.default
-          inputs.devenv.flakeModule
-          inputs.mkdocs-flake.flakeModule
         ];
         systems = [
           "x86_64-linux"
           "x86_64-darwin"
         ];
-        perSystem =
-          { config, ... }:
-          {
-            devenv.shells.default = {
-              devenvs = {
-                nix.enable = true;
-                nix.flake.enable = true;
-                tools.mkdocs.enable = true;
-                tools.mkdocs.package = config.packages.documentation;
-              };
-            };
-            documentation = {
-              mkdocs-root = ./.;
-              strict = true;
+        perSystem = _: {
+          devenv.shells.default = {
+            devenvs = {
+              nix.enable = true;
+              nix.flake.enable = true;
+              tools.mkdocs.enable = true;
             };
           };
+        };
         flake = {
           #flake-parts
           inherit flakeModules;

@@ -10,8 +10,7 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         #other imports
-        inputs.devenvs.flakeModules.default # Import the module and the devenv module
-        inputs.devenvs.devenv
+        inputs.devenvs.flakeModule # Import the module and the devenv module
       ];
       systems = [
         "x86_64-linux"
