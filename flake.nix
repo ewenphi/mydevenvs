@@ -44,6 +44,7 @@
                   mkdocs.enable = true;
                   mkdocs.package = config.packages.documentation;
                   just.enable = true;
+                  just.pre-commit.enable = true;
                 };
               };
             };

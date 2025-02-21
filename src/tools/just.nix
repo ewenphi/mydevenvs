@@ -8,6 +8,7 @@
   options = {
     devenvs.tools.just = {
       enable = lib.mkEnableOption "enable the just-generate script";
+      pre-commit.enable = lib.mkEnableOption "enable the launch of pre-commit on all files in just test";
       just-content = lib.mkOption {
         default = "";
         description = "internal to contain all the justfile";
@@ -39,6 +40,7 @@
 
     devenvs.tools.just.just-content = ''
       tests:
+      ${if config.devenvs.tools.just.pre-commit.enable then "  pre-commit run --all-files" else ""}
       ${config.devenvs.tools.just.just-test}
 
       docs:
