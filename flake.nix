@@ -33,15 +33,18 @@
           "x86_64-linux"
           "x86_64-darwin"
         ];
-        perSystem = _: {
-          devenv.shells.default = {
-            devenvs = {
-              nix.enable = true;
-              nix.flake.enable = true;
-              tools.mkdocs.enable = true;
+        perSystem =
+          { config, ... }:
+          {
+            devenv.shells.default = {
+              devenvs = {
+                nix.enable = true;
+                nix.flake.enable = true;
+                tools.mkdocs.enable = true;
+                tools.mkdocs.package = config.packages.documentation;
+              };
             };
           };
-        };
         flake = {
           #flake-parts
           inherit flakeModules;
