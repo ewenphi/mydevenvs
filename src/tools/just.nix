@@ -39,10 +39,10 @@
 
     devenvs.tools.just.just-content = ''
       tests:
-        ${config.devenvs.tools.just.just-test}
+      ${config.devenvs.tools.just.just-test}
 
       docs:
-        ${config.devenvs.tools.just.just-doc}
+      ${config.devenvs.tools.just.just-doc}
     '';
   };
 }

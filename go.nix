@@ -35,7 +35,7 @@
     );
 
     devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mkIf config.devenvs.go.tests.enable "go test"
+      lib.mkIf config.devenvs.go.tests.enable "  go test"
     );
   };
 }

@@ -23,7 +23,7 @@
     );
 
     devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mKIf config.devenvs.ts.tests.enable "jest"
+      lib.mKIf config.devenvs.ts.tests.enable "  jest"
     );
 
     languages = lib.mkIf config.devenvs.global.languages.enable {

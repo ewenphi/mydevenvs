@@ -1,5 +1,5 @@
 tests:
-  
+
 
 docs:
   mkdocs build

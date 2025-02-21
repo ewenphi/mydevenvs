@@ -60,7 +60,7 @@
     };
 
     devenvs.tools.just = {
-      just-doc = "cargo doc";
+      just-doc = "  cargo doc";
     };
 
     enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
@@ -71,10 +71,7 @@
     );
 
     devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mkIf config.devenvs.rust.tests.enable ''
-        cargo nextest nextest run
-        cargo test --doc
-      ''
+      lib.mkIf config.devenvs.rust.tests.enable "  cargo nextest run\n  cargo test --doc"
     );
   };
 }
