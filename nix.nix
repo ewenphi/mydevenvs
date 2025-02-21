@@ -56,17 +56,14 @@
   config = lib.mkIf config.devenvs.nix.enable {
     languages.nix.enable = lib.mkIf config.devenvs.global.languages.enable true;
 
-    git-hooks.hooks =
-      lib.mkIf config.devenvs.global.hooks.enable {
-        nixfmt-rfc-style.enable = true;
-        statix.enable = true;
-        deadnix.enable = true;
-        deadnix.settings.edit = true;
-        commitizen.enable = true;
-      }
-      // lib.attrsets.optionalAttrs config.devenvs.nix.flake.enable {
-        flake-checker.enable = true;
-      };
+    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
+      nixfmt-rfc-style.enable = true;
+      statix.enable = true;
+      deadnix.enable = true;
+      deadnix.settings.edit = true;
+      commitizen.enable = true;
+      flake-checker.enable = lib.mkIf config.devenvs.nix.flake.enable true;
+    };
 
     enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
       lib.mkIf config.devenvs.nix.tests.enable ''nix build''
