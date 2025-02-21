@@ -22,6 +22,10 @@
       ''
     );
 
+    devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
+      lib.mKIf config.devenvs.ts.tests.enable "jest"
+    );
+
     languages = lib.mkIf config.devenvs.global.languages.enable {
       javascript = {
         enable = true;
@@ -30,10 +34,6 @@
         package = pkgs.nodejs_latest;
       };
       typescript.enable = true;
-    };
-
-    scripts = lib.mkIf config.devenvs.global.scripts.enable {
-      tests.exec = config.enterTest;
     };
 
     git-hooks.hooks =

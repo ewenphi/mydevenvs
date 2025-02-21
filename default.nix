@@ -7,5 +7,6 @@ _: {
     ./rust.nix
     ./typescript.nix
     ./src/tools/mkdocs.nix
+    ./src/tools/just.nix
   ];
 }

@@ -40,8 +40,11 @@
               devenvs = {
                 nix.enable = true;
                 nix.flake.enable = true;
-                tools.mkdocs.enable = true;
-                tools.mkdocs.package = config.packages.documentation;
+                tools = {
+                  mkdocs.enable = true;
+                  mkdocs.package = config.packages.documentation;
+                  just.enable = true;
+                };
               };
             };
             documentation = {

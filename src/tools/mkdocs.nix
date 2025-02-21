@@ -26,5 +26,6 @@
       lib.mkIf (config.devenvs.tools.mkdocs.package != null) "test ${config.devenvs.tools.mkdocs.package}"
     );
 
+    devenvs.tools.just.just-doc = "mkdocs build";
   };
 }

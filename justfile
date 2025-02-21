@@ -1,0 +1,6 @@
+tests:
+  
+
+docs:
+  mkdocs build
+

@@ -69,6 +69,10 @@
       lib.mkIf config.devenvs.nix.tests.enable ''nix build''
     );
 
+    devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
+      lib.mkIf config.devenvs.nix.tests.enable "nix build"
+    );
+
     packages = lib.mkIf config.devenvs.global.packages.enable [
       pkgs.nil
     ];

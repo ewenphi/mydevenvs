@@ -57,11 +57,8 @@
       RUST_BACKTRACE = "1";
     };
 
-    scripts = lib.mkIf config.devenvs.global.scripts.enable {
-      docs.exec = "cargo doc";
-      update.exec = "cargo update -v --recursive";
-
-      coverage.exec = "${pkgs.cargo-tarpaulin}/bin/cargo-tarpaulin --skip-clean --out Html";
+    devenvs.tools.just = {
+      just-doc = "cargo doc";
     };
 
     enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
