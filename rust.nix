@@ -51,6 +51,8 @@
       pkgs.cargo-edit
       #auto compile
       pkgs.cargo-watch
+
+      pkgs.cargo-nextest
     ];
 
     env = lib.mkIf config.devenvs.global.env.enable {
@@ -64,6 +66,13 @@
     enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
       lib.mkIf config.devenvs.rust.tests.enable ''
         ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
+        cargo test --doc
+      ''
+    );
+
+    devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
+      lib.mkIf config.devenvs.rust.tests.enable ''
+        cargo nextest nextest run
         cargo test --doc
       ''
     );
