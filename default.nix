@@ -6,5 +6,6 @@ _: {
     ./python.nix
     ./rust.nix
     ./typescript.nix
+    ./src/tools/mkdocs.nix
   ];
 }
