@@ -44,6 +44,10 @@
                 tools.mkdocs.package = config.packages.documentation;
               };
             };
+            documentation = {
+              mkdocs-root = ./.;
+              strict = true;
+            };
           };
         flake = {
           #flake-parts
