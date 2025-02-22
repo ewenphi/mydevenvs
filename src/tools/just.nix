@@ -50,9 +50,6 @@
       '';
     };
 
-    devenvs.tools.just.just-test =
-      if config.devenvs.tools.just.pre-commit.enable then "  pre-commit run --all-files" else "";
-
     devenvs.tools.just.just-content = ''
       #this justfile is generated
 
@@ -78,12 +75,24 @@
       }
       ${config.devenvs.tools.just.just-test}
 
+      ${
+        if config.devenvs.tools.just.pre-commit.enable then
+          ''
+            pre-commit-all:
+              pre-commit run --all-files
+          ''
+        else
+          ""
+      }
+
       ${if config.devenvs.tools.just.just-doc != "" then "docs:" else ""}
       ${config.devenvs.tools.just.just-doc}
 
       all: ${if config.devenvs.tools.just.just-build != "" then "build" else ""} ${
         if config.devenvs.tools.just.just-test != "" then "tests" else ""
-      } ${if config.devenvs.tools.just.just-doc != "" then "docs" else ""}
+      } ${if config.devenvs.tools.just.just-doc != "" then "docs" else ""} ${
+        if config.devenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
+      }
     '';
   };
 }

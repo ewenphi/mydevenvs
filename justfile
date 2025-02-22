@@ -1,6 +1,6 @@
 #this justfile is generated
 
-list:
+default:
   just --list
 
 
@@ -9,11 +9,15 @@ list:
 
 
 
-tests:
+
+
+
+pre-commit-all:
   pre-commit run --all-files
+
 
 docs:
   mkdocs build
 
-all:  tests docs
+all:   docs pre-commit-all
 
