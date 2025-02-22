@@ -26,8 +26,8 @@
       just-test = lib.mkIf config.devenvs.global.enterTest.enable (
         lib.mKIf config.devenvs.ts.tests.enable "  jest"
       );
-      just-build = lib.mkIf config.devenvs.global.scripts.enable "npm run build";
-      just-run = lib.mkIf config.devenvs.global.scripts.enable "npm start";
+      just-build = lib.mkIf config.devenvs.global.scripts.enable "  npm run build";
+      just-run = lib.mkIf config.devenvs.global.scripts.enable "  npm start";
     };
 
     languages = lib.mkIf config.devenvs.global.languages.enable {

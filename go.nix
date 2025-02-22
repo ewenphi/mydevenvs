@@ -40,8 +40,8 @@
           just-test = lib.mkIf config.devenvs.global.enterTest.enable (
             lib.mkIf config.devenvs.go.tests.enable "  go test"
           );
-          just-build = lib.mkIf config.devenvs.global.scripts.enable "go build";
-          just-run = lib.mkIf config.devenvs.global.scripts.enable "go run .";
+          just-build = lib.mkIf config.devenvs.global.scripts.enable "  go build";
+          just-run = lib.mkIf config.devenvs.global.scripts.enable "  go run .";
         };
       };
     };

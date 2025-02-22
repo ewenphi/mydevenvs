@@ -74,8 +74,8 @@
           just-test = lib.mkIf config.devenvs.global.enterTest.enable (
             lib.mkIf config.devenvs.rust.tests.enable "  cargo nextest run\n  cargo test --doc"
           );
-          just-build = lib.mkIf config.devenvs.global.scripts.enable "cargo build";
-          just-run = lib.mkIf config.devenvs.global.scripts.enable "cargo run";
+          just-build = lib.mkIf config.devenvs.global.scripts.enable "  cargo build";
+          just-run = lib.mkIf config.devenvs.global.scripts.enable "  cargo run";
         };
       };
     };
