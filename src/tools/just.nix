@@ -61,7 +61,7 @@
 
       ${
         if (config.devenvs.tools.just.just-run != "") then
-          "run:${if config.devenvs.just.just-build != "" then " build" else ""}"
+          "run:${if config.devenvs.tools.just.just-build != "" then " build" else ""}"
         else
           ""
       }
