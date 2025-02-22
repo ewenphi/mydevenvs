@@ -59,10 +59,6 @@
       RUST_BACKTRACE = "1";
     };
 
-    devenvs.tools.just = {
-      just-doc = "  cargo doc";
-    };
-
     enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
       lib.mkIf config.devenvs.rust.tests.enable ''
         ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
@@ -70,8 +66,18 @@
       ''
     );
 
-    devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mkIf config.devenvs.rust.tests.enable "  cargo nextest run\n  cargo test --doc"
-    );
+    devenvs = {
+      tools = {
+        just = {
+          just-doc = "  cargo doc";
+
+          just-test = lib.mkIf config.devenvs.global.enterTest.enable (
+            lib.mkIf config.devenvs.rust.tests.enable "  cargo nextest run\n  cargo test --doc"
+          );
+          just-build = lib.mkIf config.devenvs.global.scripts.enable "cargo build";
+          just-run = lib.mkIf config.devenvs.global.scripts.enable "cargo run";
+        };
+      };
+    };
   };
 }
