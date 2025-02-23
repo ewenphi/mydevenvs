@@ -38,6 +38,12 @@
         example = "cargo test";
         description = "a command that launches the tests, that is addad to the justfile";
       };
+      just-build-release = lib.mkOption {
+        default = "";
+        type = lib.types.lines;
+        example = "npm run build";
+        description = "a command that build the software in release mode, that is addad to the justfile";
+      };
     };
   };
 
@@ -88,11 +94,14 @@
       ${if config.devenvs.tools.just.just-doc != "" then "docs:" else ""}
       ${config.devenvs.tools.just.just-doc}
 
+      ${if config.devenvs.tools.just.just-build-release != "" then "build-release:" else ""}
+      ${config.devenvs.tools.just.just-build-release}
+
       all: ${if config.devenvs.tools.just.just-build != "" then "build" else ""} ${
         if config.devenvs.tools.just.just-test != "" then "tests" else ""
       } ${if config.devenvs.tools.just.just-doc != "" then "docs" else ""} ${
         if config.devenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
-      }
+      }${if config.devenvs.tools.just.just-build-release != "" then "build-release" else ""}
     '';
   };
 }

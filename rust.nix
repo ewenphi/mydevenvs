@@ -77,6 +77,7 @@
           );
           just-build = lib.mkIf config.devenvs.global.scripts.enable "  cargo build";
           just-run = lib.mkIf config.devenvs.global.scripts.enable "  cargo run";
+          just-build-release = lib.mkIf config.devenvs.global.scripts.enable "  cargo build --release";
         };
       };
     };
