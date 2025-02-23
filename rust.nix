@@ -20,6 +20,7 @@
       markdownlint.enable = true;
       yamlfmt.enable = true;
       clippy.enable = true;
+      clippy.settings.denyWarnings = true;
       cargo-check.enable = true;
       cargo-deny = {
         enable = true;
