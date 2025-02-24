@@ -5,11 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     devenv.url = "github:cachix/devenv";
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
     advisory-db = {
       url = "github:rustsec/advisory-db";
       flake = false;
     };
     mkdocs-flake.url = "github:applicative-systems/mkdocs-flake";
+    mkdocs-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
