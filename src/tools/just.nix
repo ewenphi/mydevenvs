@@ -101,7 +101,7 @@
         if config.devenvs.tools.just.just-test != "" then "tests" else ""
       } ${if config.devenvs.tools.just.just-doc != "" then "docs" else ""} ${
         if config.devenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
-      }${if config.devenvs.tools.just.just-build-release != "" then "build-release" else ""}
+      } ${if config.devenvs.tools.just.just-build-release != "" then "build-release" else ""}
     '';
   };
 }
