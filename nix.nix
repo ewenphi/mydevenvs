@@ -67,5 +67,8 @@
     packages = lib.mkIf config.devenvs.global.packages.enable [
       pkgs.nil
     ];
+
+    #not nix related, for nix flake check to work
+    containers = lib.mkOverride 80 { };
   };
 }
