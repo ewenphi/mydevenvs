@@ -8,7 +8,6 @@
 {
   options = {
     devenvs.rust.enable = lib.mkEnableOption "enable rust devenv";
-    devenvs.rust.tests.enable = lib.mkEnableOption "enable nextest + test -doc";
   };
 
   config = lib.mkIf config.devenvs.rust.enable {
@@ -59,13 +58,6 @@
     env = lib.mkIf config.devenvs.global.env.enable {
       RUST_BACKTRACE = "1";
     };
-
-    enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mkIf config.devenvs.rust.tests.enable ''
-        ${pkgs.cargo-nextest}/bin/cargo-nextest nextest run
-        cargo test --doc
-      ''
-    );
 
     devenvs = {
       tools = {
