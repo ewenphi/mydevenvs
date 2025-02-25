@@ -48,7 +48,6 @@
       nix = {
         enable = lib.mkEnableOption "enable nix devenv";
         flake.enable = lib.mkEnableOption "enable flake";
-        tests.enable = lib.mkEnableOption "nix build in test";
       };
     };
   };
@@ -64,14 +63,6 @@
       commitizen.enable = true;
       flake-checker.enable = lib.mkIf config.devenvs.nix.flake.enable true;
     };
-
-    enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mkIf config.devenvs.nix.tests.enable ''nix build''
-    );
-
-    devenvs.tools.just.just-test = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mkIf config.devenvs.nix.tests.enable "  nix build"
-    );
 
     packages = lib.mkIf config.devenvs.global.packages.enable [
       pkgs.nil
