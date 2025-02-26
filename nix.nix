@@ -69,6 +69,7 @@
       deadnix.settings.edit = true;
       commitizen.enable = true;
       flake-checker.enable = lib.mkIf config.devenvs.nix.flake.enable true;
+      flake-checker.entry = "${config.git-hooks.hooks.flake-checker.package}/bin/flake-checker -f --no-telemetry";
     };
 
     packages = lib.mkIf config.devenvs.global.packages.enable [
