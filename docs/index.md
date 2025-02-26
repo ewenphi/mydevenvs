@@ -20,56 +20,9 @@ Or add the inputs and import the modules in your flake with flake-parts.
 
 ###
 
-    {
-      inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-        flake-parts.url = "github:hercules-ci/flake-parts";
-        devenvs.url = "github:yvaniak/devenvs";  #Get the input
-      };
-
-      outputs =
-        inputs:
-        inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-        imports = [
-          #other imports
-          inputs.devenvs.flakeModules.default    #Import the module and
-          inputs.devenvs.devenv                  the devenv module
-        ];
-        systems = [
-          "x86_64-linux"
-          "aarch64-linux"
-          "aarch64-darwin"
-          "x86_64-darwin"
-        ];
-        perSystem =
-          {
-          self',
-          config,
-          ...
-          }:
-          {
-          #define a devenv shell defined by the flake-parts module
-          devenv.shells.default = {
-            devenvs = {                          #Change the options
-              go.enable = true;
-              go.tests.enable = true;
-              nix = {
-                enable = true;
-                flake.enable = true;
-                tests.enable = true;
-              };
-            };
-
-                                                 #Change the regular devenv options
-            enterShell = ''
-              echo "shell for example project"
-            '';
-            };
-          };
-        flake = {
-        };
-      };
-    }
+```nix title="templates/flake.nix"
+--8<-- "templates/flake.nix"
+```
 
 ###
 
@@ -91,18 +44,22 @@ You must add an input in the devenv.yaml
 
 ###
 
-    inputs:
-      nixpkgs: #alredy defined nixpkgs
-        url: github:cachix/devenv-nixpkgs/rolling
-      devenvs:
-        url: github:yvaniak/devenvs
+```nix title="devenv.yaml"
+inputs:
+  nixpkgs: #alredy defined nixpkgs
+    url: github:cachix/devenv-nixpkgs/rolling
+  devenvs:
+    url: github:yvaniak/devenvs
+```
 
 And imports the extension in devenv.nix, you can then use the options of the extension
 
 ###
 
-    imports = [ inputs.devenvs.devenvModule ];
-    devenvs.typescript = {
-      enable = true;
-      prettier.enable = true;
-    };
+```nix title="devenv.nix"
+imports = [ inputs.devenvs.devenvModule ];
+devenvs.typescript = {
+  enable = true;
+  prettier.enable = true;
+};
+```

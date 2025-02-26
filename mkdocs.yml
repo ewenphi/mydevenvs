@@ -24,5 +24,18 @@ theme:
         name: Switch to dark mode
       primary: cyan
       accent: deep purple
+
+  #code block copy
+  features:
+    - content.code.copy
 markdown_extensions:
   - attr_list
+
+  #code blocks
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
