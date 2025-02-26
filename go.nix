@@ -6,7 +6,6 @@
 {
   options = {
     devenvs.go.enable = lib.mkEnableOption "enable go devenv";
-    devenvs.go.tests.enable = lib.mkEnableOption "enable go test";
   };
 
   config = lib.mkIf config.devenvs.go.enable {

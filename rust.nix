@@ -64,9 +64,7 @@
         just = {
           just-doc = "  cargo doc";
 
-          just-test = lib.mkIf config.devenvs.global.enterTest.enable (
-            lib.mkIf config.devenvs.rust.tests.enable "  cargo nextest run\n  cargo test --doc"
-          );
+          just-test = lib.mkIf config.devenvs.global.enterTest.enable "  cargo nextest run\n  cargo test --doc";
           just-build = lib.mkIf config.devenvs.global.scripts.enable "  cargo build";
           just-run = lib.mkIf config.devenvs.global.scripts.enable "  cargo run";
           just-build-release = lib.mkIf config.devenvs.global.scripts.enable "  cargo build --release";
