@@ -3,6 +3,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     devenvs.url = "github:yvaniak/devenvs"; # Get the input
+    devenvs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -11,6 +12,7 @@
       imports = [
         #other imports
         inputs.devenvs.flakeModule # Import the module and the devenv module
+        inputs.devenvs.devenv
       ];
       systems = [
         "x86_64-linux"
@@ -28,7 +30,6 @@
             nix = {
               enable = true;
               flake.enable = true;
-              tests.enable = true;
             };
           };
 
