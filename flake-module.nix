@@ -1,13 +1,28 @@
-_localFlake:
-{ config, lib, ... }:
-{
-  perSystem = _: {
-    devenv.modules = [
-      ./default.nix
-    ];
-    #attrset of packages as an option in the module to add the cargo doc
-    checks = {
-      build-default-package = lib.mkIf (config.packages.default != null) config.packages.default;
+_localFlake: _: {
+  perSystem =
+    {
+      lib,
+      config,
+      ...
+    }:
+    let
+      cfg = config.devenv.shells.default;
+    in
+    {
+      devenv.modules = [
+        ./default.nix
+      ];
+
+      checks = lib.mkMerge [
+        (lib.mkIf cfg.devenvs.docs.check.enable {
+          docs = cfg.devenvs.docs.check.package;
+        })
+        (lib.mkIf cfg.devenvs.nix.check.enable {
+          default-package = cfg.devenvs.nix.check.package;
+        })
+        (lib.mkIf cfg.devenvs.tools.git-hooks.enable {
+          git-hooks = cfg.git-hooks.run;
+        })
+      ];
     };
-  };
 }

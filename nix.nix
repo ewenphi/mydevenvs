@@ -48,6 +48,13 @@
       nix = {
         enable = lib.mkEnableOption "enable nix devenv";
         flake.enable = lib.mkEnableOption "enable flake";
+        check.enable = lib.mkEnableOption "add the package to the test";
+        check.package = lib.mkPackageOption pkgs "default-package" {
+          default = null;
+          nullable = true;
+          example = "config.packages.default";
+          extraDescription = "A package produced by you to be added in the checks";
+        };
       };
     };
   };

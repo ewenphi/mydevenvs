@@ -16,12 +16,6 @@
   };
 
   config = lib.mkIf config.devenvs.ts.enable {
-    enterTest = lib.mkIf config.devenvs.global.enterTest.enable (
-      lib.mkIf config.devenvs.ts.tests.enable ''
-        jest
-      ''
-    );
-
     devenvs.tools.just = {
       just-test = lib.mkIf config.devenvs.global.enterTest.enable (
         lib.mkIf config.devenvs.ts.tests.enable "  jest"

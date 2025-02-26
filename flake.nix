@@ -26,9 +26,10 @@
       in
       {
         imports = [
-          inputs.flake-parts.flakeModules.flakeModules
           flakeModules.default
           inputs.devenv.flakeModule
+
+          inputs.flake-parts.flakeModules.flakeModules
           inputs.mkdocs-flake.flakeModule
         ];
         systems = [
@@ -42,11 +43,13 @@
               devenvs = {
                 nix.enable = true;
                 nix.flake.enable = true;
+                docs.check.enable = true;
+                docs.check.package = config.packages.documentation;
                 tools = {
                   mkdocs.enable = true;
-                  mkdocs.package = config.packages.documentation;
                   just.enable = true;
                   just.pre-commit.enable = true;
+                  git-hooks.enable = true;
                 };
               };
             };
