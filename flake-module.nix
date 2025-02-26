@@ -1,7 +1,6 @@
 _localFlake: _: {
   perSystem =
     {
-      lib,
       config,
       ...
     }:
@@ -13,16 +12,10 @@ _localFlake: _: {
         ./default.nix
       ];
 
-      checks =
-        { }
-        // lib.optionalAttrs cfg.devenvs.docs.check.enable {
-          docs = cfg.devenvs.docs.check.package;
-        }
-        // lib.optionalAttrs cfg.devenvs.nix.check.enable {
-          default-package = cfg.devenvs.nix.check.package;
-        }
-        // lib.optionalAttrs cfg.devenvs.tools.git-hooks.enable {
-          git-hooks = cfg.git-hooks.run;
-        };
+      checks = {
+        ${if cfg.devenvs.docs.check.enable then "docs" else null} = cfg.devenvs.docs.check.package;
+        ${if cfg.devenvs.nix.check.enable then "default-package" else null} = cfg.devenvs.nix.check.package;
+        ${if cfg.devenvs.tools.git-hooks.enable then "git-hooks" else null} = cfg.git-hooks.run;
+      };
     };
 }
