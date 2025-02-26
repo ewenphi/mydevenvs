@@ -13,16 +13,16 @@ _localFlake: _: {
         ./default.nix
       ];
 
-      checks = lib.mkMerge [
-        (lib.mkIf cfg.devenvs.docs.check.enable {
+      checks =
+        { }
+        // lib.optionalAttrs cfg.devenvs.docs.check.enable {
           docs = cfg.devenvs.docs.check.package;
-        })
-        (lib.mkIf cfg.devenvs.nix.check.enable {
+        }
+        // lib.optionalAttrs cfg.devenvs.nix.check.enable {
           default-package = cfg.devenvs.nix.check.package;
-        })
-        (lib.mkIf cfg.devenvs.tools.git-hooks.enable {
+        }
+        // lib.optionalAttrs cfg.devenvs.tools.git-hooks.enable {
           git-hooks = cfg.git-hooks.run;
-        })
-      ];
+        };
     };
 }
