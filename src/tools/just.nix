@@ -54,6 +54,8 @@
       just-generate.exec = ''
         echo "${config.devenvs.tools.just.just-content}" > justfile
       '';
+      #temp
+      just-generate.binary = "bash";
     };
 
     devenvs.tools.just.just-content = ''
