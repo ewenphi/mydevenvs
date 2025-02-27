@@ -49,6 +49,7 @@
 
   config = lib.mkIf config.mydevenvs.tools.just.enable {
     packages = [ pkgs.just ];
+    enterShell = "alias j=just";
 
     scripts = lib.mkIf config.mydevenvs.global.scripts.enable {
       just-generate.exec = ''
@@ -66,15 +67,23 @@
     mydevenvs.tools.just.just-content = ''
       #this justfile is generated
 
+      # print the just commands
       default:
         just --list
 
-      ${if config.mydevenvs.tools.just.just-build != "" then "build:" else ""}
+      ${
+        if config.mydevenvs.tools.just.just-build != "" then
+          "alias b := build\n# build the software\nbuild:"
+        else
+          ""
+      }
       ${config.mydevenvs.tools.just.just-build}
 
       ${
         if (config.mydevenvs.tools.just.just-run != "") then
-          "run:${if config.mydevenvs.tools.just.just-build != "" then " build" else ""}"
+          "alias r := run\n# run the software\nrun:${
+            if config.mydevenvs.tools.just.just-build != "" then " build" else ""
+          }"
         else
           ""
       }
@@ -82,7 +91,9 @@
 
       ${
         if (config.mydevenvs.tools.just.just-test != "") then
-          "tests:${if config.mydevenvs.tools.just.just-build != "" then " build" else ""}"
+          "alias t := tests\n# launch all the tests\ntests:${
+            if config.mydevenvs.tools.just.just-build != "" then " build" else ""
+          }"
         else
           ""
       }
@@ -91,6 +102,8 @@
       ${
         if config.mydevenvs.tools.just.pre-commit.enable then
           ''
+            alias p := pre-commit-all
+            # launch all the pre-commit hooks on all the files
             pre-commit-all:
               pre-commit run --all-files
           ''
@@ -98,12 +111,24 @@
           ""
       }
 
-      ${if config.mydevenvs.tools.just.just-doc != "" then "docs:" else ""}
+      ${
+        if config.mydevenvs.tools.just.just-doc != "" then
+          "alias d := docs\n# build the docs\ndocs:"
+        else
+          ""
+      }
       ${config.mydevenvs.tools.just.just-doc}
 
-      ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release:" else ""}
+      ${
+        if config.mydevenvs.tools.just.just-build-release != "" then
+          "alias br := build-release\n# build the software in release mode\nbuild-release:"
+        else
+          ""
+      }
       ${config.mydevenvs.tools.just.just-build-release}
 
+      alias a := all
+      # launch all the steps
       all: ${if config.mydevenvs.tools.just.just-build != "" then "build" else ""} ${
         if config.mydevenvs.tools.just.just-test != "" then "tests" else ""
       } ${if config.mydevenvs.tools.just.just-doc != "" then "docs" else ""} ${
