@@ -48,12 +48,16 @@
   };
 
   config = lib.mkIf config.mydevenvs.tools.just.enable {
-    packages = [ pkgs.just ];
+    packages = [
+      pkgs.just
+      pkgs.watchexec
+    ];
     enterShell = "alias j=just";
 
     scripts = lib.mkIf config.mydevenvs.global.scripts.enable {
       just-generate.exec = ''
         echo "${config.mydevenvs.tools.just.just-content}" > justfile
+        just --fmt --unstable
       '';
 
       all.exec = ''
@@ -134,6 +138,15 @@
       } ${if config.mydevenvs.tools.just.just-doc != "" then "docs" else ""} ${
         if config.mydevenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
       } ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release" else ""}
+
+      alias w := watch
+      # launch all the steps (can be very intense on cpu)
+      watch:
+        watchexec just ${if config.mydevenvs.tools.just.just-build != "" then "build" else ""} ${
+          if config.mydevenvs.tools.just.just-test != "" then "tests" else ""
+        } ${if config.mydevenvs.tools.just.just-doc != "" then "docs" else ""} ${
+          if config.mydevenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
+        }
     '';
   };
 }
