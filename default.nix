@@ -8,7 +8,6 @@ _: {
     ./typescript.nix
     ./src/tools/mkdocs.nix
     ./src/tools/just.nix
-    ./src/tools/git-hooks.nix
     ./src/docs.nix
   ];
 }

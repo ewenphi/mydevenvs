@@ -49,7 +49,6 @@
                   mkdocs.enable = true;
                   just.enable = true;
                   just.pre-commit.enable = true;
-                  git-hooks.enable = true;
                 };
               };
             };
