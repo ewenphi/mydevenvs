@@ -5,7 +5,7 @@
 }:
 {
   options = {
-    devenvs.docs = {
+    mydevenvs.docs = {
       check.enable = lib.mkEnableOption "add the doc package to the checks";
       check.package = lib.mkPackageOption pkgs "docs" {
         default = null;

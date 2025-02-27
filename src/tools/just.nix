@@ -6,7 +6,7 @@
 }:
 {
   options = {
-    devenvs.tools.just = {
+    mydevenvs.tools.just = {
       enable = lib.mkEnableOption "enable the just-generate script";
       pre-commit.enable = lib.mkEnableOption "enable the launch of pre-commit on all files in just test";
       just-content = lib.mkOption {
@@ -47,12 +47,12 @@
     };
   };
 
-  config = lib.mkIf config.devenvs.tools.just.enable {
+  config = lib.mkIf config.mydevenvs.tools.just.enable {
     packages = [ pkgs.just ];
 
-    scripts = lib.mkIf config.devenvs.global.scripts.enable {
+    scripts = lib.mkIf config.mydevenvs.global.scripts.enable {
       just-generate.exec = ''
-        echo "${config.devenvs.tools.just.just-content}" > justfile
+        echo "${config.mydevenvs.tools.just.just-content}" > justfile
       '';
 
       all.exec = ''
@@ -63,33 +63,33 @@
       '';
     };
 
-    devenvs.tools.just.just-content = ''
+    mydevenvs.tools.just.just-content = ''
       #this justfile is generated
 
       default:
         just --list
 
-      ${if config.devenvs.tools.just.just-build != "" then "build:" else ""}
-      ${config.devenvs.tools.just.just-build}
+      ${if config.mydevenvs.tools.just.just-build != "" then "build:" else ""}
+      ${config.mydevenvs.tools.just.just-build}
 
       ${
-        if (config.devenvs.tools.just.just-run != "") then
-          "run:${if config.devenvs.tools.just.just-build != "" then " build" else ""}"
+        if (config.mydevenvs.tools.just.just-run != "") then
+          "run:${if config.mydevenvs.tools.just.just-build != "" then " build" else ""}"
         else
           ""
       }
-      ${config.devenvs.tools.just.just-run}
+      ${config.mydevenvs.tools.just.just-run}
 
       ${
-        if (config.devenvs.tools.just.just-test != "") then
-          "tests:${if config.devenvs.tools.just.just-build != "" then " build" else ""}"
+        if (config.mydevenvs.tools.just.just-test != "") then
+          "tests:${if config.mydevenvs.tools.just.just-build != "" then " build" else ""}"
         else
           ""
       }
-      ${config.devenvs.tools.just.just-test}
+      ${config.mydevenvs.tools.just.just-test}
 
       ${
-        if config.devenvs.tools.just.pre-commit.enable then
+        if config.mydevenvs.tools.just.pre-commit.enable then
           ''
             pre-commit-all:
               pre-commit run --all-files
@@ -98,17 +98,17 @@
           ""
       }
 
-      ${if config.devenvs.tools.just.just-doc != "" then "docs:" else ""}
-      ${config.devenvs.tools.just.just-doc}
+      ${if config.mydevenvs.tools.just.just-doc != "" then "docs:" else ""}
+      ${config.mydevenvs.tools.just.just-doc}
 
-      ${if config.devenvs.tools.just.just-build-release != "" then "build-release:" else ""}
-      ${config.devenvs.tools.just.just-build-release}
+      ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release:" else ""}
+      ${config.mydevenvs.tools.just.just-build-release}
 
-      all: ${if config.devenvs.tools.just.just-build != "" then "build" else ""} ${
-        if config.devenvs.tools.just.just-test != "" then "tests" else ""
-      } ${if config.devenvs.tools.just.just-doc != "" then "docs" else ""} ${
-        if config.devenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
-      } ${if config.devenvs.tools.just.just-build-release != "" then "build-release" else ""}
+      all: ${if config.mydevenvs.tools.just.just-build != "" then "build" else ""} ${
+        if config.mydevenvs.tools.just.just-test != "" then "tests" else ""
+      } ${if config.mydevenvs.tools.just.just-doc != "" then "docs" else ""} ${
+        if config.mydevenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
+      } ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release" else ""}
     '';
   };
 }

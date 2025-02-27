@@ -40,7 +40,7 @@
           { config, ... }:
           {
             devenv.shells.default = {
-              devenvs = {
+              mydevenvs = {
                 nix.enable = true;
                 nix.flake.enable = true;
                 docs.check.enable = true;

@@ -1,13 +1,13 @@
 { config, lib, ... }:
 {
   options = {
-    devenvs.python.enable = lib.mkEnableOption "enable python devenv";
+    mydevenvs.python.enable = lib.mkEnableOption "enable python devenv";
   };
 
-  config = lib.mkIf config.devenvs.python.enable {
-    languages.python.enable = lib.mkIf config.devenvs.global.languages.enable true;
+  config = lib.mkIf config.mydevenvs.python.enable {
+    languages.python.enable = lib.mkIf config.mydevenvs.global.languages.enable true;
 
-    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
+    git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
       ruff.enable = true;
       pylint.enable = true;
       black.enable = true;

@@ -2,16 +2,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    devenvs.url = "github:yvaniak/devenvs";
-    devenvs.inputs.nixpkgs.follows = "nixpkgs";
+    mydevenvs.url = "github:yvaniak/mydevenvs";
+    mydevenvs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        inputs.devenvs.flakeModule
-        inputs.devenvs.devenv
+        inputs.mydevenvs.flakeModule
+        inputs.mydevenvs.devenv
       ];
       systems = [
         "x86_64-linux"
@@ -21,7 +21,7 @@
       ];
       perSystem = _: {
         devenv.shells.default = {
-          devenvs = {
+          mydevenvs = {
             go.enable = true;
             nix = {
               enable = true;

@@ -5,13 +5,13 @@
 }:
 {
   options = {
-    devenvs.go.enable = lib.mkEnableOption "enable go devenv";
+    mydevenvs.go.enable = lib.mkEnableOption "enable go devenv";
   };
 
-  config = lib.mkIf config.devenvs.go.enable {
-    languages.go.enable = lib.mkIf config.devenvs.global.languages.enable true;
+  config = lib.mkIf config.mydevenvs.go.enable {
+    languages.go.enable = lib.mkIf config.mydevenvs.global.languages.enable true;
 
-    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
+    git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
       gofmt.enable = true;
       golangci-lint.enable = true;
       gotest.enable = true;
@@ -27,11 +27,11 @@
       };
     };
 
-    devenvs = {
+    mydevenvs = {
       tools = {
         just = {
-          just-build = lib.mkIf config.devenvs.global.scripts.enable "  go build";
-          just-run = lib.mkIf config.devenvs.global.scripts.enable "  go run .";
+          just-build = lib.mkIf config.mydevenvs.global.scripts.enable "  go build";
+          just-run = lib.mkIf config.mydevenvs.global.scripts.enable "  go run .";
         };
       };
     };
