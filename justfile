@@ -1,6 +1,6 @@
 #this justfile is generated
 
-# print the list of availables just commands
+# print the just commands
 default:
   just --list
 
@@ -28,6 +28,6 @@ docs:
 
 
 alias a := all
-# run all the steps
+# launch all the steps
 all:   docs pre-commit-all 
 
