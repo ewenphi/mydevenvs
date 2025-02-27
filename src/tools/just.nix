@@ -54,16 +54,13 @@
       just-generate.exec = ''
         echo "${config.devenvs.tools.just.just-content}" > justfile
       '';
-      #temp
-      just-generate.binary = "bash";
 
       all.exec = ''
         nix flake check --no-pure-eval
-        nix develop --no-pure-eval --command just-generate
-        nix develop --no-pure-eval -c just "all"
-        nix develop --no-pure-eval -c pre-commit run --all-files
+        just-generate
+        just "all"
+        pre-commit run --all-files
       '';
-      all.binary = "bash";
     };
 
     devenvs.tools.just.just-content = ''
