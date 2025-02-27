@@ -43,12 +43,20 @@
               mydevenvs = {
                 nix.enable = true;
                 nix.flake.enable = true;
-                docs.check.enable = true;
-                docs.check.package = config.packages.documentation;
+                docs = {
+                  check = {
+                    enable = true;
+                    package = config.packages.documentation;
+                    docs-builder = config.documentation.mkdocs-package;
+                  };
+                };
                 tools = {
                   mkdocs.enable = true;
-                  just.enable = true;
-                  just.pre-commit.enable = true;
+                  just = {
+                    enable = true;
+                    pre-commit.enable = true;
+                    check.enable = true;
+                  };
                 };
               };
             };
