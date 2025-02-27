@@ -26,7 +26,6 @@
           devenvs = {
             # Change the options
             go.enable = true;
-            go.tests.enable = true;
             nix = {
               enable = true;
               flake.enable = true;
