@@ -2,17 +2,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    devenvs.url = "github:yvaniak/devenvs"; # Get the input
-    devenvs.inputs.nixpkgs.follows = "nixpkgs";
+    mydevenvs.url = "github:yvaniak/mydevenvs";
+    mydevenvs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        #other imports
-        inputs.devenvs.flakeModule # Import the module and the devenv module
-        inputs.devenvs.devenv
+        inputs.mydevenvs.flakeModule
+        inputs.mydevenvs.devenv
       ];
       systems = [
         "x86_64-linux"
@@ -21,10 +20,8 @@
         "x86_64-darwin"
       ];
       perSystem = _: {
-        #define a devenv shell defined by the flake-parts module
         devenv.shells.default = {
-          devenvs = {
-            # Change the options
+          mydevenvs = {
             go.enable = true;
             nix = {
               enable = true;
@@ -32,7 +29,6 @@
             };
           };
 
-          #Change the regular devenv options
           enterShell = ''
             echo "shell for example project"
           '';

@@ -1,6 +1,6 @@
 site_name: MyDevenvs
-repo_url: https://github.com/yvaniak/devenvs
-repo_name: Devenvs
+repo_url: https://github.com/yvaniak/mydevenvs
+repo_name: MyDevenvs
 site_description: extension of devenv
 site_author: Yvaniak
 nav:

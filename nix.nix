@@ -6,7 +6,7 @@
 }:
 {
   options = {
-    devenvs = {
+    mydevenvs = {
       global = {
         hooks.enable = lib.mkOption {
           default = true;
@@ -59,20 +59,20 @@
     };
   };
 
-  config = lib.mkIf config.devenvs.nix.enable {
-    languages.nix.enable = lib.mkIf config.devenvs.global.languages.enable true;
+  config = lib.mkIf config.mydevenvs.nix.enable {
+    languages.nix.enable = lib.mkIf config.mydevenvs.global.languages.enable true;
 
-    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
+    git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
       nixfmt-rfc-style.enable = true;
       statix.enable = true;
       deadnix.enable = true;
       deadnix.settings.edit = true;
       commitizen.enable = true;
-      flake-checker.enable = lib.mkIf config.devenvs.nix.flake.enable true;
+      flake-checker.enable = lib.mkIf config.mydevenvs.nix.flake.enable true;
       flake-checker.entry = "${config.git-hooks.hooks.flake-checker.package}/bin/flake-checker -f --no-telemetry";
     };
 
-    packages = lib.mkIf config.devenvs.global.packages.enable [
+    packages = lib.mkIf config.mydevenvs.global.packages.enable [
       pkgs.nil
     ];
 

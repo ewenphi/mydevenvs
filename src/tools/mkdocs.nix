@@ -5,16 +5,16 @@
 }:
 {
   options = {
-    devenvs.tools.mkdocs = {
+    mydevenvs.tools.mkdocs = {
       enable = lib.mkEnableOption "enable the mkdocs hook";
     };
   };
 
-  config = lib.mkIf config.devenvs.tools.mkdocs.enable {
-    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
+  config = lib.mkIf config.mydevenvs.tools.mkdocs.enable {
+    git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
       mkdocs-linkcheck.enable = config.devenv.isTesting;
     };
 
-    devenvs.tools.just.just-doc = "  mkdocs build";
+    mydevenvs.tools.just.just-doc = "  mkdocs build";
   };
 }

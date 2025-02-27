@@ -7,7 +7,8 @@ let
 in
 {
   config.checks = {
-    ${if cfg.devenvs.docs.check.enable then "docs" else null} = cfg.devenvs.docs.check.package;
-    ${if cfg.devenvs.nix.check.enable then "default-package" else null} = cfg.devenvs.nix.check.package;
+    ${if cfg.mydevenvs.docs.check.enable then "docs" else null} = cfg.mydevenvs.docs.check.package;
+    ${if cfg.mydevenvs.nix.check.enable then "default-package" else null} =
+      cfg.mydevenvs.nix.check.package;
   };
 }

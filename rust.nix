@@ -7,13 +7,13 @@
 }:
 {
   options = {
-    devenvs.rust.enable = lib.mkEnableOption "enable rust devenv";
+    mydevenvs.rust.enable = lib.mkEnableOption "enable rust devenv";
   };
 
-  config = lib.mkIf config.devenvs.rust.enable {
-    languages.rust.enable = lib.mkIf config.devenvs.global.languages.enable true;
+  config = lib.mkIf config.mydevenvs.rust.enable {
+    languages.rust.enable = lib.mkIf config.mydevenvs.global.languages.enable true;
 
-    git-hooks.hooks = lib.mkIf config.devenvs.global.hooks.enable {
+    git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
       rustfmt.enable = true;
       taplo.enable = true;
       markdownlint.enable = true;
@@ -38,13 +38,13 @@
       cargo-audit = {
         enable = true;
         name = "cargo-audit";
-        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.devenvs.inputs.advisory-db} -D warnings -D unmaintained -D unsound -D yanked"; # TODO: maybe essayer de mettre db dans une option pour pas rely on inputs
+        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.mydevenvs.inputs.advisory-db} -D warnings -D unmaintained -D unsound -D yanked"; # TODO: maybe essayer de mettre db dans une option pour pas rely on inputs
         files = "\\.rs$";
         pass_filenames = false;
       };
     };
 
-    packages = lib.mkIf config.devenvs.global.packages.enable [
+    packages = lib.mkIf config.mydevenvs.global.packages.enable [
       #voir la taille des grosses deps
       pkgs.cargo-bloat
       #gerer les deps depuis le cli
@@ -55,19 +55,19 @@
       pkgs.cargo-nextest
     ];
 
-    env = lib.mkIf config.devenvs.global.env.enable {
+    env = lib.mkIf config.mydevenvs.global.env.enable {
       RUST_BACKTRACE = "1";
     };
 
-    devenvs = {
+    mydevenvs = {
       tools = {
         just = {
           just-doc = "  cargo doc";
 
-          just-test = lib.mkIf config.devenvs.global.enterTest.enable "  cargo nextest run\n  cargo test --doc";
-          just-build = lib.mkIf config.devenvs.global.scripts.enable "  cargo build";
-          just-run = lib.mkIf config.devenvs.global.scripts.enable "  cargo run";
-          just-build-release = lib.mkIf config.devenvs.global.scripts.enable "  cargo build --release";
+          just-test = lib.mkIf config.mydevenvs.global.enterTest.enable "  cargo nextest run\n  cargo test --doc";
+          just-build = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo build";
+          just-run = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo run";
+          just-build-release = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo build --release";
         };
       };
     };

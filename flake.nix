@@ -40,7 +40,7 @@
           { config, ... }:
           {
             devenv.shells.default = {
-              devenvs = {
+              mydevenvs = {
                 nix.enable = true;
                 nix.flake.enable = true;
                 docs.check.enable = true;
@@ -67,8 +67,12 @@
           devenvModule = import ./default.nix;
 
           templates.default = {
-            path = ./templates;
+            path = ./templates/default;
             description = "myDevenvs template with flake-parts";
+          };
+          templates.no-comments = {
+            path = ./templates/no-comments;
+            description = "myDevenvs template with flake-parts but without comments";
           };
         };
       }

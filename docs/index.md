@@ -1,8 +1,8 @@
-This is only a personal extension of [Devenv](https://devenv.sh){:target="\_blank"} for my projects but you can use it.
+This is only a personal module of [Devenv](https://devenv.sh){:target="\_blank"} for my projects but you can use it.
 
 See the great [Devenv docs](https://devenv.sh/getting-started/){:target="\_blank"} and the [Reference](https://devenv.sh/reference/options/){:target="\_blank"} for devenv usage.
 
-- This is a combinations of devenvs options for go, c, rust, typescript and nix.
+- This is a combinations of devenv options for go, c, rust, typescript and nix.
 
 - There is features of devenv that are only available with the devenv software.
 
@@ -12,7 +12,7 @@ You can bootrap a project with this command :
 
 ###
 
-    nix flake init -t github:yvaniak/devenvs
+    nix flake init -t github:yvaniak/mydevenvs
 
 ###
 
@@ -21,7 +21,7 @@ Or add the inputs and import the modules in your flake with flake-parts.
 ###
 
 ```nix title="templates/flake.nix"
---8<-- "templates/flake.nix"
+--8<-- "templates/default/flake.nix"
 ```
 
 ###
@@ -48,8 +48,8 @@ You must add an input in the devenv.yaml
 inputs:
   nixpkgs: #alredy defined nixpkgs
     url: github:cachix/devenv-nixpkgs/rolling
-  devenvs:
-    url: github:yvaniak/devenvs
+  mydevenvs:
+    url: github:yvaniak/mydevenvs
 ```
 
 And imports the extension in devenv.nix, you can then use the options of the extension
@@ -57,8 +57,8 @@ And imports the extension in devenv.nix, you can then use the options of the ext
 ###
 
 ```nix title="devenv.nix"
-imports = [ inputs.devenvs.devenvModule ];
-devenvs.typescript = {
+imports = [ inputs.mydevenvs.devenvModule ];
+mydevenvs.typescript = {
   enable = true;
   prettier.enable = true;
 };
