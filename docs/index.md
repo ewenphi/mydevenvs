@@ -21,7 +21,7 @@ Or add the inputs and import the modules in your flake with flake-parts.
 ###
 
 ```nix title="templates/flake.nix"
---8<-- "templates/flake.nix"
+--8<-- "templates/default/flake.nix"
 ```
 
 ###
