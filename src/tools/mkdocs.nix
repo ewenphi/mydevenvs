@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.mydevenvs.tools.mkdocs.enable {
     git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
-      mkdocs-linkcheck.enable = config.devenv.isTesting;
+      mkdocs-linkcheck.enable = true;
     };
 
     mydevenvs.tools.just.just-doc = "  mkdocs build";
