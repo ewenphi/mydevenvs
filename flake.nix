@@ -47,8 +47,11 @@
                 docs.check.package = config.packages.documentation;
                 tools = {
                   mkdocs.enable = true;
-                  just.enable = true;
-                  just.pre-commit.enable = true;
+                  just = {
+                    enable = true;
+                    pre-commit.enable = true;
+                    check.enable = true;
+                  };
                 };
               };
             };

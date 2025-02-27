@@ -9,6 +9,7 @@
     mydevenvs.tools.just = {
       enable = lib.mkEnableOption "enable the just-generate script";
       pre-commit.enable = lib.mkEnableOption "enable the launch of pre-commit on all files in just test";
+      check.enable = lib.mkEnableOption "enable the launch nix flake check (test the presence of nix before)";
       just-content = lib.mkOption {
         default = "";
         description = "internal to contain all the justfile";
@@ -58,13 +59,6 @@
       just-generate.exec = ''
         echo "${config.mydevenvs.tools.just.just-content}" > justfile
         just --fmt --unstable
-      '';
-
-      all.exec = ''
-        nix flake check --no-pure-eval
-        just-generate
-        just "all"
-        pre-commit run --all-files
       '';
     };
 
@@ -131,13 +125,32 @@
       }
       ${config.mydevenvs.tools.just.just-build-release}
 
+      ${
+        if config.mydevenvs.tools.just.check.enable then
+          ''
+            alias nc := nix-checks
+            # launch all the checks in a flake if present and nix is available
+            nix-checks:
+              if "nix --version"; then \
+                nix flake check --no-pure-eval --extra-experimental-features flakes --extra-experimental-features nix-command;\
+              else \
+                echo "nix is not available, so the nix checks are skipped"; \
+              fi
+          ''
+        else
+          ""
+      }
+
       alias a := all
       # launch all the steps
       all: ${if config.mydevenvs.tools.just.just-build != "" then "build" else ""} ${
         if config.mydevenvs.tools.just.just-test != "" then "tests" else ""
       } ${if config.mydevenvs.tools.just.just-doc != "" then "docs" else ""} ${
         if config.mydevenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
-      } ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release" else ""}
+      } ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release" else ""} ${
+        if config.mydevenvs.tools.just.check.enable then "nix-checks" else ""
+      }
+
 
       alias w := watch
       # launch all the steps (can be very intense on cpu)
