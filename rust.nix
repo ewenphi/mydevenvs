@@ -38,7 +38,7 @@
       cargo-audit = {
         enable = true;
         name = "cargo-audit";
-        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.mydevenvs.inputs.advisory-db} -D warnings -D unmaintained -D unsound -D yanked"; # TODO: maybe essayer de mettre db dans une option pour pas rely on inputs
+        entry = "${pkgs.cargo-audit}/bin/cargo-audit audit -n -d ${inputs.mydevenvs.inputs.advisory-db} -D warnings -D unsound -D yanked"; # TODO: maybe essayer de mettre db dans une option pour pas rely on inputs
         files = "\\.rs$";
         pass_filenames = false;
       };
