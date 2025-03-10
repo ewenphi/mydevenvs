@@ -100,10 +100,15 @@
       ${
         if config.mydevenvs.tools.just.pre-commit.enable then
           ''
-            alias p := pre-commit-all
+            alias pa := pre-commit-all
             # launch all the pre-commit hooks on all the files
             pre-commit-all:
               pre-commit run --all-files
+
+            alias p := pre-commit
+            # launch all the pre-commit hooks
+            pre-commit:
+              pre-commit run
           ''
         else
           ""
@@ -143,11 +148,11 @@
 
       alias a := all
       # launch all the steps
-      all: ${if config.mydevenvs.tools.just.just-build != "" then "build" else ""} ${
-        if config.mydevenvs.tools.just.just-test != "" then "tests" else ""
-      } ${if config.mydevenvs.tools.just.just-doc != "" then "docs" else ""} ${
-        if config.mydevenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""
-      } ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release" else ""} ${
+      all: ${if config.mydevenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""} ${
+        if config.mydevenvs.tools.just.just-build != "" then "build" else ""
+      } ${if config.mydevenvs.tools.just.just-test != "" then "tests" else ""} ${
+        if config.mydevenvs.tools.just.just-doc != "" then "docs" else ""
+      }  ${if config.mydevenvs.tools.just.just-build-release != "" then "build-release" else ""} ${
         if config.mydevenvs.tools.just.check.enable then "nix-checks" else ""
       }
 
