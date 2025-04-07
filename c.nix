@@ -26,6 +26,7 @@
     mydevenvs.tools.just = lib.mkIf config.mydevenvs.c.meson.enable {
       just-test = lib.mkIf config.mydevenvs.global.enterTest.enable "  meson test -C builddir";
       just-build = lib.mkIf config.mydevenvs.global.scripts.enable "  meson compile -C builddir";
+      just-run = lib.mkIf config.mydevenvs.global.scripts.enable "  ./builddir/${config.packages.default.pname}";
     };
   };
 }
