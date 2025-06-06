@@ -52,5 +52,9 @@
           pass_filenames = false;
         };
       };
+
+    packages = lib.mkIf config.mydevenvs.ts.biome.enable [
+      pkgs.biome
+    ];
   };
 }
