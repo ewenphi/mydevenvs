@@ -45,6 +45,19 @@
         example = "npm run build";
         description = "a command that build the software in release mode, that is addad to the justfile";
       };
+      just-upgrade = lib.mkOption {
+        default = "";
+        type = lib.types.lines;
+        example = "npm upgrade";
+        description = "a command that upgrade the software dependencies";
+      };
+      just-upgrade-check = lib.mkOption {
+        default = "";
+        type = lib.types.lines;
+        example = "npm outdated";
+        description = "a command that check if the software dependencies are up to date";
+      };
+
     };
   };
 
@@ -146,8 +159,32 @@
           ""
       }
 
+      ${
+        if config.mydevenvs.tools.just.just-upgrade-check != "" then
+          ''
+            alias uc := upgrade-check
+            # check if the dependencies need updates
+            upgrade-check:
+          ''
+        else
+          ""
+      }
+      ${config.mydevenvs.tools.just.just-upgrade-check}
+
+      ${
+        if config.mydevenvs.tools.just.just-upgrade != "" then
+          ''
+            alias u := upgrade
+            # upgrade the dependencies
+            upgrade:
+          ''
+        else
+          ""
+      }
+      ${config.mydevenvs.tools.just.just-upgrade}
+
       alias a := all
-      # launch all the steps
+      # launch all the steps that involves checks
       all: ${if config.mydevenvs.tools.just.pre-commit.enable then "pre-commit-all" else ""} ${
         if config.mydevenvs.tools.just.just-build != "" then "build" else ""
       } ${if config.mydevenvs.tools.just.just-test != "" then "tests" else ""} ${
