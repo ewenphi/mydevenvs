@@ -164,8 +164,7 @@
           ''
             alias uc := upgrade-check
             # check if the dependencies need updates
-            upgrade-check:
-          ''
+            upgrade-check:''
         else
           ""
       }
@@ -176,8 +175,7 @@
           ''
             alias u := upgrade
             # upgrade the dependencies
-            upgrade:
-          ''
+            upgrade:''
         else
           ""
       }
