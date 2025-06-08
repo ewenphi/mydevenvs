@@ -22,6 +22,8 @@
       );
       just-build-release = lib.mkIf config.mydevenvs.global.scripts.enable "  npm run build";
       just-run = lib.mkIf config.mydevenvs.global.scripts.enable "  npm start";
+      just-upgrade-check = lib.mkIf config.mydevenvs.global.scripts.enable "  npm outdated";
+      just-upgrade = lib.mkIf config.mydevenvs.global.scripts.enable "  npm upgrade";
     };
 
     languages = lib.mkIf config.mydevenvs.global.languages.enable {
