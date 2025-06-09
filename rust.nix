@@ -53,6 +53,7 @@
       pkgs.cargo-watch
 
       pkgs.cargo-nextest
+      pkgs.cargo-outdated
     ];
 
     env = lib.mkIf config.mydevenvs.global.env.enable {
@@ -68,6 +69,8 @@
           just-build = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo build";
           just-run = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo run";
           just-build-release = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo build --release";
+          just-upgrade-check = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo outdated";
+          just-upgrade = lib.mkIf config.mydevenvs.global.scripts.enable "  cargo upgrade --recursive";
         };
       };
     };
