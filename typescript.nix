@@ -16,6 +16,12 @@
   };
 
   config = lib.mkIf config.mydevenvs.ts.enable {
+    mydevenvs.ts = {
+      prettier.enable = lib.mkDefault true;
+      biome.enable = lib.mkDefault true;
+      script-lint.enable = lib.mkDefault true;
+    };
+
     mydevenvs.tools.just = {
       just-test = lib.mkIf config.mydevenvs.global.enterTest.enable (
         lib.mkIf config.mydevenvs.ts.tests.enable "  jest"
@@ -36,24 +42,17 @@
       typescript.enable = true;
     };
 
-    git-hooks.hooks =
-      lib.mkIf config.mydevenvs.global.hooks.enable {
-        eslint.enable = true;
-      }
-      // lib.attrsets.optionalAttrs config.mydevenvs.ts.biome.enable {
-        biome.enable = true;
-      }
-      // lib.attrsets.optionalAttrs config.mydevenvs.ts.prettier.enable {
-        prettier.enable = true;
-      }
-      // lib.attrsets.optionalAttrs config.mydevenvs.ts.script-lint.enable {
-        npm-lint = {
-          enable = true;
-          entry = "npm run lint";
-          files = "\\.((js)|(ts))";
-          pass_filenames = false;
-        };
+    git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
+      eslint.enable = true;
+      biome.${if config.mydevenvs.ts.biome.enable then "enable" else null} = true;
+      prettier.${if config.mydevenvs.ts.prettier.enable then "enable" else null} = true;
+      ${if config.mydevenvs.ts.script-lint.enable then "script-lint" else null} = {
+        enable = true;
+        entry = "npm run lint";
+        files = "\\.((js)|(ts))";
+        pass_filenames = false;
       };
+    };
 
     packages = lib.mkIf config.mydevenvs.ts.biome.enable [
       pkgs.biome
