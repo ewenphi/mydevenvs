@@ -17,7 +17,6 @@
 
   config = lib.mkIf config.mydevenvs.ts.enable {
     mydevenvs.ts = {
-      prettier.enable = lib.mkDefault true;
       biome.enable = lib.mkDefault true;
       script-lint.enable = lib.mkDefault true;
     };
