@@ -60,6 +60,8 @@
   };
 
   config = lib.mkIf config.mydevenvs.nix.enable {
+    mydevenvs.nix.flake.enable = lib.mkDefault true;
+
     languages.nix.enable = lib.mkIf config.mydevenvs.global.languages.enable true;
 
     git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
