@@ -23,7 +23,7 @@
 
     mydevenvs.tools.just = {
       just-test = lib.mkIf config.mydevenvs.global.enterTest.enable (
-        lib.mkIf config.mydevenvs.ts.tests.enable "  jest"
+        lib.mkIf config.mydevenvs.ts.tests.enable "  npm run test"
       );
       just-build-release = lib.mkIf config.mydevenvs.global.scripts.enable "  npm run build";
       just-run = lib.mkIf config.mydevenvs.global.scripts.enable "  npm start";
