@@ -45,6 +45,7 @@
     git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
       eslint.${if config.mydevenvs.ts.eslint.enable then "enable" else null} = true;
       biome.${if config.mydevenvs.ts.biome.enable then "enable" else null} = true;
+      biome.settings.write = true;
       prettier.${if config.mydevenvs.ts.prettier.enable then "enable" else null} = true;
       ${if config.mydevenvs.ts.script-lint.enable then "script-lint" else null} = {
         enable = true;
