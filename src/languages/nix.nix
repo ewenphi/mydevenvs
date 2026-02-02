@@ -65,7 +65,7 @@
     languages.nix.enable = lib.mkIf config.mydevenvs.global.languages.enable true;
 
     git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
-      nixfmt-rfc-style.enable = true;
+      nixfmt.enable = true;
       statix.enable = true;
       deadnix.enable = true;
       deadnix.settings.edit = true;
