@@ -30,7 +30,7 @@ nix-checks:
 
 alias a := all
 
-# launch all the steps
+# launch all the steps that involves checks
 all: pre-commit-all docs nix-checks
 
 alias w := watch

@@ -65,6 +65,7 @@
     packages = [
       pkgs.just
       pkgs.watchexec
+      pkgs.pre-commit
     ];
     enterShell = "alias j=just";
 
