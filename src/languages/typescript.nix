@@ -37,7 +37,8 @@
         enable = true;
         npm.enable = true;
         npm.install.enable = true;
-        package = pkgs.nodejs_latest;
+        package = pkgs.nodejs_25;
+        lsp.enable = true;
       };
       typescript.enable = true;
     };
