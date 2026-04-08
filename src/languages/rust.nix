@@ -16,7 +16,6 @@
     git-hooks.hooks = lib.mkIf config.mydevenvs.global.hooks.enable {
       rustfmt.enable = true;
       taplo.enable = true;
-      markdownlint.enable = true;
       yamlfmt.enable = true;
       clippy.enable = true;
       clippy.settings.denyWarnings = true;
