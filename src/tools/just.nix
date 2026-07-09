@@ -151,7 +151,7 @@
             # launch all the checks in a flake if present and nix is available
             nix-checks:
               if "nix --version"; then \
-                nix flake check --no-pure-eval --extra-experimental-features flakes --extra-experimental-features nix-command;\
+                nix flake check --no-pure-eval --accept-flake-config --all-systems --extra-experimental-features flakes --extra-experimental-features nix-command;\
               else \
                 echo "nix is not available, so the nix checks are skipped"; \
               fi
