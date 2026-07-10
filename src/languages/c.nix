@@ -17,6 +17,8 @@
   };
 
   config = lib.mkIf config.mydevenvs.c.enable {
+    languages.c.enable = true;
+
     packages = lib.mkIf config.mydevenvs.global.packages.enable [
       pkgs.clang
       (lib.mkIf config.mydevenvs.c.meson.enable pkgs.meson)
